@@ -11,7 +11,7 @@ class M_admin extends CI_Model
 	}
 
 	public function chartJurusan(){
-		return $this->db->query("SELECT COUNT(nisn) AS total, jurusan.nama_jurusan, jurusan.id_jurusan FROM `alumni` JOIN jurusan ON jurusan.id_jurusan=alumni.id_jurusan GROUP BY jurusan.nama_jurusan")->result_array();
+		return $this->db->query("SELECT COUNT(nisn) AS total, jurusan.nama_jurusan, jurusan.id_jurusan FROM `alumni` LEFT JOIN jurusan ON jurusan.id_jurusan=alumni.id_jurusan GROUP BY jurusan.nama_jurusan")->result_array();
 	}
 
 	public function getGender(){

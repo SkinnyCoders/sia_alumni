@@ -19,10 +19,51 @@ class Dashboard extends CI_controller
 
     public function index()
     {
+        
         $data['title'] = 'Dashboard Admin';
         $data['total'] = $this->m_admin->getTotal();
         $data['jurusan'] = $this->db->get('jurusan')->result_array();
         getViews($data, 'v_admin/dashboard');
+    }
+
+    public function get_chart_visitor(){
+        $arr_bulan = [
+            1 => "Januari",
+            2 => "Februari",
+            3 => "Maret",
+            4 => "April",
+            5 => "Mei",
+            6 => "Juni",
+            7 => "Juli",
+            8 => "Agustus",
+            9 => "September",
+            10 => "Oktober",
+            11 => "November",
+            12 => "Desember"
+        ];
+
+
+        $sekarang = date('m');
+        $old = $sekarang - 4;
+        $tahun = date('Y');
+        $hari = date('d');
+
+        for($i = $old; $i<=$sekarang; $i++){
+          $bulan[] = $i;
+        }
+
+        for ($i=0; $i < count($bulan) ; $i++) { 
+            $label[] = $arr_bulan[$bulan[$i]];
+            $total = $this->db->query("SELECT * FROM `pengunjung` WHERE YEAR(`tanggal`) = $tahun AND MONTH(`tanggal`) = $bulan[$i]")->num_rows();
+            $data_perbulan[] = $total;
+        }
+
+        $data = [
+            'label' => $label,
+            'result' => $data_perbulan
+        ];
+
+        echo json_encode($data);
     }
 
         //chart alumni berdasarkan status

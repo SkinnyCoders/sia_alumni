@@ -142,6 +142,45 @@
                 <!-- PIE CHART -->
                 <div class="card card-default">
                   <div class="card-header">
+                    <h3 class="card-title">Grafik Pengunjung</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <canvas id="areaChart" style="height:300px;"></canvas>
+                      </div>
+
+  <!--                     <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-12">
+                            
+                          </div>
+                        </div>
+                        <div class="row mt-5">
+                          <div class="col-md-12">
+                            <canvas id="pieChart3" style="height:230px;"></canvas>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!-- PIE CHART -->
+                <div class="card card-default">
+                  <div class="card-header">
                     <h3 class="card-title">Grafik Alumni Berdasarkan Jurusan</h3>
 
                     <div class="card-tools">
@@ -239,127 +278,65 @@
   <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
   <script>
-  var ctx = document.getElementById("myChart");
-    var barOption = {
+    // Get context with jQuery - using jQuery's .get() method.
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      plugins: {
+        labels: {
+          render: 'value',
+          fontColor: '#fff',
+          precision: 2
+        }
+      },
+      legend: {
+        display: true
+      },
       scales: {
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            beginAtZero: true
+        xAxes: [{
+          gridLines : {
+            display : true,
           }
         }],
-        xAxes: [{
-          stacked: true,
-          ticks: {
-            beginAtZero: true
+        yAxes: [{
+          gridLines : {
+            display : true,
           }
         }]
-
       }
     }
 
-  $.ajax({
-    type : 'POST',
-    url : "<?=base_url('admin/dashboard/get_barChart')?>",
-    dataType : "json",
-    success: function(data){
+    $.ajax({
+          type : 'POST',
+          url : "<?=base_url('admin/dashboard/get_chart_visitor')?>",
+          dataType : "json",
+          success: function(data){
 
-      var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: data.label,
-        datasets: [{
-            label: 'Kerja',
-            data: data.kerja,
-            backgroundColor: [
-              'rgba(127,255,0, 0.2)',
-              'rgba(127,255,0, 0.2)',
-              'rgba(127,255,0, 0.2)',
-              'rgba(127,255,0, 0.2)',
-              'rgba(127,255,0, 0.2)',
-              'rgba(127,255,0, 0.2)'
-            ],
-            borderColor: [
-              'rgba(127,255,0,1)',
-              'rgba(127,255,0,1)',
-              'rgba(127,255,0,1)',
-              'rgba(127,255,0,1)',
-              'rgba(127,255,0,1)',
-              'rgba(127,255,0,1)'
-            ],
-            borderWidth: 2
-          },
-          {
-            label: 'Kerja & Kuliah',
-            data: data.kerja_kuliah,
-            backgroundColor: [
-              'rgba(60,141,188,0.2)',
-              'rgba(60,141,188,0.2)',
-              'rgba(60,141,188,0.2)',
-              'rgba(60,141,188,0.2)',
-              'rgba(60,141,188,0.2)',
-              'rgba(60,141,188,0.2)'
-            ],
-            borderColor: [
-              'rgba(60,141,188,1)',
-              'rgba(60,141,188,1)',
-              'rgba(60,141,188,1)',
-              'rgba(60,141,188,1)',
-              'rgba(60,141,188,1)',
-              'rgba(60,141,188,1)'
-            ],
-            borderWidth: 2
-          },
-          {
-            label: 'Kuliah',
-            data: data.kuliah,
-            backgroundColor: [
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 2
-          },
-          {
-            label: 'Belum Bekerja',
-            data: data.tidak,
-            backgroundColor: [
-              'rgba(205,92,92, 0.2)',
-              'rgba(205,92,92, 0.2)',
-              'rgba(205,92,92, 0.2)',
-              'rgba(205,92,92, 0.2)',
-              'rgba(205,92,92, 0.2)',
-              'rgba(205,92,92, 0.2)'
-            ],
-            borderColor: [
-              'rgba(205,92,92,  1)',
-              'rgba(205,92,92,  1)',
-              'rgba(205,92,92,  1)',
-              'rgba(205,92,92,  1)',
-              'rgba(205,92,92,  1)',
-              'rgba(205,92,92,  1)'
-            ],
-            borderWidth: 2
+              var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+              var areaChartData = {
+                labels  : data.label,
+                datasets: [
+                  {
+                    label : 'Jumlah Pengunjung 5 Bulan Terakhir',
+                    backgroundColor     : 'rgba(60,141,188,0.4)',
+                    borderColor         : 'rgba(60,141,188,0.8)',
+                    pointRadius          : false,
+                    data                : data.result
+                  },
+                ]
+              }
+              // This will get the first returned node in the jQuery collection.
+              var areaChart = new Chart(areaChartCanvas, { 
+                type: 'line',
+                data: areaChartData, 
+                options: areaChartOptions
+              }) 
           }
-        ]
-      },
-      options: barOption
-    });
-    }
-  });
-  
-</script>
+      });
+
+     
+  </script>
 
   <script>
     $(document).ready(function() {
