@@ -74,47 +74,146 @@
 
         <div class="row">
           <!-- DONUT CHART -->
-          <div class="col-md-12">
-            <!-- PIE CHART -->
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">Grafik Alumni</h3>
+          <div class="col-md-8">
+            <div class="row">
+              <!-- PIE CHART -->
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 class="card-title">Grafik Alumni Berdasarkan Status</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <canvas id="pieChart" style="height:230px; min-height:300px"></canvas>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                   </div>
-                  <div class="col-md-6">
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <canvas id="pieChart" style="height:100%; min-height:300px"></canvas>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+
+            <div class="row">
+              <!-- PIE CHART -->
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 class="card-title">Grafik Alumni Berdasarkan Status Perjurusan</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <?php foreach ($jurusan as $j) : 
+                      $nama_jurusan = $j['nama_jurusan'];
+
+                      $nama_jurusan = str_replace(' ', '_', $nama_jurusan);
+                      ?>
+                    <div class="col-md-6 mb-5">
+                      <div class="header text-center">
+                        <p><?=ucwords($j['nama_jurusan'])?></p>
+                      </div>
+                      <div class="grafik">
+                        <canvas id="pieChart<?=$nama_jurusan?>" style="height:230px; min-height:300px"></canvas>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- PIE CHART -->
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Grafik Alumni Berdasarkan Jurusan</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <canvas id="pieChart3" style="height:230px;"></canvas>
+                      </div>
+
+  <!--                     <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-12">
+                            
+                          </div>
+                        </div>
+                        <div class="row mt-5">
+                          <div class="col-md-12">
+                            <canvas id="pieChart3" style="height:230px;"></canvas>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <!-- PIE CHART -->
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Grafik Alumni Berdasarkan Jenis Kelamin</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body">
                     <div class="row">
                       <div class="col-md-12">
                         <canvas id="pieChart2" style="height:230px;"></canvas>
                       </div>
-                    </div>
-                    <div class="row mt-5">
-                      <div class="col-md-12">
-                        <canvas id="pieChart3" style="height:230px;"></canvas>
-                      </div>
+
+  <!--                     <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-12">
+                            
+                          </div>
+                        </div>
+                        <div class="row mt-5">
+                          <div class="col-md-12">
+                            <canvas id="pieChart3" style="height:230px;"></canvas>
+                          </div>
+                        </div>
+                      </div> -->
                     </div>
                   </div>
+                  <!-- /.card-body -->
                 </div>
-
-                <div class="row mt-3">
-                  <div class="col-md-12">
-                    <canvas id="myChart" width="400" height="200"></canvas>
-                  </div>
-                </div>
-
+                <!-- /.card -->
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -137,6 +236,7 @@
 
   <!-- ChartJS -->
   <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
+  <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
   <script>
   var ctx = document.getElementById("myChart");
@@ -266,33 +366,146 @@
       var pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
+        plugins: {
+          labels: {
+            render: 'percentage',
+            fontColor: '#fff',
+            precision: 2
+          }
+        },
       }
-            $.ajax({
-                type : 'POST',
-                url : "<?=base_url('admin/dashboard/get_dataChart')?>",
-                dataType : "json",
-                success: function(data){
+      $.ajax({
+          type : 'POST',
+          url : "<?=base_url('admin/dashboard/get_dataChart')?>",
+          dataType : "json",
+          success: function(data){
 
-                    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-                    var pieChart = new Chart(pieChartCanvas, {
-                      type: 'pie',
-                      data: {
-                        labels: [
-                          'Bekerja',
-                          'Kuliah',
-                          'Bekerja Sambil Kulaih',
-                          'Belum / Tidak Bekerja',
-                        ],
-                        datasets: [{
-                          data: data.total,
-                          backgroundColor: ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
-                        }]
-                      },
-                      options: pieOptions
-                    });
-                }
-            });
+              var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+              var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: {
+                  labels: [
+                    'Bekerja',
+                    'Kuliah',
+                    'Bekerja Sambil Kulaih',
+                    'Belum / Tidak Bekerja',
+                  ],
+                  datasets: [{
+                    data: data.total,
+                    backgroundColor: ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+                  }]
+                },
+                options: pieOptions
+              });
+          }
+      });
+  });
+  </script>
+
+  <?php foreach ($jurusan as $j) : ?>
+    <script>
+    $(document).ready(function() {
+      var id_jurusan = <?=$j['id_jurusan']?>;
+      var nama_jurusan  = '<?=$j['nama_jurusan']?>';
+
+      var jurusan = nama_jurusan.split(' ').join('_');
+
+
+      var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          labels: {
+            render: 'percentage',
+            fontColor: '#fff',
+            precision: 2
+          }
+        },
+      }
+      $.ajax({
+          type : 'POST',
+          url : "<?=base_url('admin/dashboard/get_chart_baru/')?>"+id_jurusan,
+          dataType : "json",
+          success: function(data){
+
+              if (data.total == null) {
+                var pieChartCanvas = $('#pieChart'+jurusan).get(0).getContext('2d');
+                var pieChart = new Chart(pieChartCanvas, {
+                  type: 'pie',
+                  data: {
+                    labels: [
+                      'Belum Ada data'
+                    ],
+                    datasets: [{
+                      data: [0],
+                      backgroundColor: ['#00c0ef'],
+                    }]
+                  },
+                  options: pieOptions
+                });
+              }else{
+                var pieChartCanvas = $('#pieChart'+jurusan).get(0).getContext('2d');
+                var pieChart = new Chart(pieChartCanvas, {
+                  type: 'pie',
+                  data: {
+                    labels: [
+                      'Bekerja',
+                      'Kuliah',
+                      'Bekerja Sambil Kulaih',
+                      'Belum / Tidak Bekerja',
+                    ],
+                    datasets: [{
+                      data: data.total,
+                      backgroundColor: ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+                    }]
+                  },
+                  options: pieOptions
+                });
+              }
+          }
         });
+    });
+  </script>
+  
+  <?php endforeach; ?>
+
+  <script>
+    $(document).ready(function() {
+      var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          labels: {
+            render: 'percentage',
+            fontColor: '#fff',
+            precision: 2
+          }
+        },
+      }
+      $.ajax({
+          type : 'POST',
+          url : "<?=base_url('admin/dashboard/get_dataChart2')?>",
+          dataType : "json",
+          success: function(data){
+
+              var pieChartCanvas = $('#pieChart2').get(0).getContext('2d');
+              var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: {
+                  labels: [
+                    'Laki - Laki',
+                    'Perempuan'
+                  ],
+                  datasets: [{
+                    data: data.jumlah,
+                    backgroundColor: ['#00c0ef', '#00a65a'],
+                  }]
+                },
+                options: pieOptions
+              });
+          }
+      });
+  });
   </script>
 
   <script>
@@ -300,58 +513,33 @@
       var pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
+        plugins: {
+          labels: {
+            render: 'percentage',
+            fontColor: '#fff',
+            precision: 2
+          }
+        },
       }
-            $.ajax({
-                type : 'POST',
-                url : "<?=base_url('admin/dashboard/get_dataChart2')?>",
-                dataType : "json",
-                success: function(data){
+        $.ajax({
+            type : 'POST',
+            url : "<?=base_url('admin/dashboard/get_dataChart3')?>",
+            dataType : "json",
+            success: function(data){
 
-                    var pieChartCanvas = $('#pieChart2').get(0).getContext('2d');
-                    var pieChart = new Chart(pieChartCanvas, {
-                      type: 'pie',
-                      data: {
-                        labels: [
-                          'Laki - Laki',
-                          'Perempuan'
-                        ],
-                        datasets: [{
-                          data: data.jumlah,
-                          backgroundColor: ['#00c0ef', '#00a65a'],
-                        }]
-                      },
-                      options: pieOptions
-                    });
-                }
-            });
+                var pieChartCanvas = $('#pieChart3').get(0).getContext('2d');
+                var pieChart = new Chart(pieChartCanvas, {
+                  type: 'pie',
+                  data: {
+                    labels: data.nama_jurusan,
+                    datasets: [{
+                      data: data.jurusan,
+                      backgroundColor: ['#00c0ef','#f56954','#00a65a','#f39c12',  '#eaeaea'],
+                    }]
+                  },
+                  options: pieOptions
+                });
+            }
         });
-  </script>
-
-  <script>
-    $(document).ready(function() {
-      var pieOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
-      }
-            $.ajax({
-                type : 'POST',
-                url : "<?=base_url('admin/dashboard/get_dataChart3')?>",
-                dataType : "json",
-                success: function(data){
-
-                    var pieChartCanvas = $('#pieChart3').get(0).getContext('2d');
-                    var pieChart = new Chart(pieChartCanvas, {
-                      type: 'pie',
-                      data: {
-                        labels: data.nama_jurusan,
-                        datasets: [{
-                          data: data.jurusan,
-                          backgroundColor: ['#00c0ef','#f56954','#00a65a','#f39c12',  '#eaeaea'],
-                        }]
-                      },
-                      options: pieOptions
-                    });
-                }
-            });
-        });
+    });
   </script>

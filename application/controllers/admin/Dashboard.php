@@ -21,6 +21,7 @@ class Dashboard extends CI_controller
     {
         $data['title'] = 'Dashboard Admin';
         $data['total'] = $this->m_admin->getTotal();
+        $data['jurusan'] = $this->db->get('jurusan')->result_array();
         getViews($data, 'v_admin/dashboard');
     }
 
@@ -33,6 +34,34 @@ class Dashboard extends CI_controller
 
         echo json_encode($data);
     
+    }
+
+    public function get_chart_baru($id){
+        //get status berkerja perjurusan
+        $berkerja = $this->db->query("SELECT * FROM `status_alumni` JOIN alumni ON alumni.nisn=status_alumni.nisn WHERE alumni.id_jurusan = $id AND status_alumni.status ='bekerja'")->num_rows();
+        $kuliah =  $this->db->query("SELECT * FROM `status_alumni` JOIN alumni ON alumni.nisn=status_alumni.nisn WHERE alumni.id_jurusan = $id AND status_alumni.status ='kuliah'")->num_rows();
+        $nganggur =  $this->db->query("SELECT * FROM `status_alumni` JOIN alumni ON alumni.nisn=status_alumni.nisn WHERE alumni.id_jurusan = $id AND status_alumni.status ='tidak'")->num_rows();
+        $kerja_kuliah =  $this->db->query("SELECT * FROM `status_alumni` JOIN alumni ON alumni.nisn=status_alumni.nisn WHERE alumni.id_jurusan = $id AND status_alumni.status ='bekerja kuliah'")->num_rows();
+
+
+        $data = [$berkerja, $kuliah, $kerja_kuliah, $nganggur];
+
+        $flag = false;
+        for($i = 0; $i<count($data); $i++){
+            if ($data[$i] > 0) {
+                $flag = true;
+            }
+        }
+
+        if ($flag) {
+            $result = ['total' => $data];        
+        }else{
+            $result = ['total' => null];
+        }
+
+        
+
+        echo json_encode($result);
     }
 
     public function get_barChart(){
